@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Favicons - Alibi</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background: #f5f5f5; 
+        }
+        .favicon-container { 
+            display: inline-block; 
+            margin: 10px; 
+            text-align: center; 
+        }
+        .favicon { 
+            border: 1px solid #ddd; 
+            margin-bottom: 5px; 
+        }
+        .size-label { 
+            font-size: 12px; 
+            color: #666; 
+        }
+        .instructions {
+            background: #e8f4fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Alibi Favicon Generator</h1>
+    
+    <div class="instructions">
+        <h3>Instructions:</h3>
+        <p>1. Right-click on each favicon below and "Save image as..."</p>
+        <p>2. Save with the exact filename shown</p>
+        <p>3. Place all files in the /public directory</p>
+    </div>
+
+    <div class="favicon-container">
+        <canvas id="favicon-16" width="16" height="16" class="favicon"></canvas>
+        <div class="size-label">favicon-16x16.png</div>
+    </div>
+
+    <div class="favicon-container">
+        <canvas id="favicon-32" width="32" height="32" class="favicon"></canvas>
+        <div class="size-label">favicon-32x32.png</div>
+    </div>
+
+    <div class="favicon-container">
+        <canvas id="apple-touch" width="180" height="180" class="favicon"></canvas>
+        <div class="size-label">apple-touch-icon.png</div>
+    </div>
+
+    <div class="favicon-container">
+        <canvas id="android-192" width="192" height="192" class="favicon"></canvas>
+        <div class="size-label">android-chrome-192x192.png</div>
+    </div>
+
+    <div class="favicon-container">
+        <canvas id="android-512" width="512" height="512" class="favicon"></canvas>
+        <div class="size-label">android-chrome-512x512.png</div>
+    </div>
+
+    <div class="favicon-container">
+        <canvas id="og-image" width="1200" height="630" class="favicon"></canvas>
+        <div class="size-label">og-image.png</div>
+    </div>
+
+    <div class="favicon-container">
+        <canvas id="twitter-card" width="1200" height="600" class="favicon"></canvas>
+        <div class="size-label">twitter-card.png</div>
+    </div>
+
+    <script>
+        function drawFavicon(canvasId, size, isOG = false) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            
+            if (isOG) {
+                // For Open Graph images, create a more elaborate design
+                ctx.fillStyle = '#f59e0b';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Add white "A" in center
+                ctx.fillStyle = 'white';
+                ctx.font = `bold ${size * 0.3}px serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('A', canvas.width / 2, canvas.height / 2);
+                
+                // Add text
+                ctx.fillStyle = 'white';
+                ctx.font = `bold ${size * 0.08}px sans-serif`;
+                ctx.fillText('Your Billable Hours, Defended', canvas.width / 2, canvas.height * 0.8);
+            } else {
+                // For regular favicons, just the amber circle with "A"
+                ctx.fillStyle = '#f59e0b';
+                ctx.beginPath();
+                ctx.arc(size/2, size/2, size/2, 0, 2 * Math.PI);
+                ctx.fill();
+                
+                ctx.fillStyle = 'white';
+                ctx.font = `bold ${size * 0.6}px serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('A', size/2, size/2);
+            }
+        }
+
+        // Generate all favicons
+        drawFavicon('favicon-16', 16);
+        drawFavicon('favicon-32', 32);
+        drawFavicon('apple-touch', 180);
+        drawFavicon('android-192', 192);
+        drawFavicon('android-512', 512);
+        drawFavicon('og-image', 1200, true);
+        drawFavicon('twitter-card', 1200, true);
+    </script>
+</body>
+</html>

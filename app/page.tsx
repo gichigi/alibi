@@ -1,12 +1,17 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Clock, BarChart2, FileText, Eye, Lock, ChevronRight } from "lucide-react"
+import { Clock, BarChart2, FileText, Eye, Lock, ChevronRight, Menu, X } from "lucide-react"
+import { useState } from "react"
 import TestimonialCard from "@/components/testimonial-card"
 import FeatureCard from "@/components/feature-card"
 import PricingCard from "@/components/pricing-card"
 import FaqAccordion from "@/components/faq-accordion"
 
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
   return (
     <div className="flex min-h-screen flex-col">
       {/* Header */}
@@ -46,6 +51,15 @@ export default function Home() {
               FAQ
             </Link>
           </nav>
+          <div className="md:hidden">
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
+          </div>
           <div className="flex items-center gap-4">
             <Link href="/login">
               <Button variant="ghost" className="hidden md:inline-flex">
@@ -57,15 +71,53 @@ export default function Home() {
             </Link>
           </div>
         </div>
+        
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t bg-background">
+            <div className="container py-4">
+              <nav className="flex flex-col space-y-4">
+                <Link
+                  href="#features"
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Evidence
+                </Link>
+                <Link
+                  href="#testimonials"
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Testimonials
+                </Link>
+                <Link
+                  href="#pricing"
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Pricing
+                </Link>
+                <Link
+                  href="#faq"
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  FAQ
+                </Link>
+              </nav>
+            </div>
+          </div>
+        )}
       </header>
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative py-20 md:py-24 lg:py-32 bg-gradient-to-b from-background to-background/95">
+        <section className="relative py-16 md:py-20 lg:py-28 xl:py-32 bg-gradient-to-b from-background to-background/95">
           <div className="container px-4 md:px-6">
-            <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:gap-16">
-              <div className="flex flex-col justify-center space-y-4">
-                <div className="space-y-2">
+            <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-16">
+              <div className="flex flex-col justify-center space-y-6">
+                <div className="space-y-4">
                   <h1 className="text-3xl font-serif font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
                     Your Billable Hours,
                     <br />
@@ -75,8 +127,11 @@ export default function Home() {
                     Build an airtight case for every billable hour. When clients question your invoice, present
                     irrefutable evidence.
                   </p>
+                  <p className="max-w-[600px] text-sm text-muted-foreground/80 md:text-base">
+                    Automatic time tracking that proves you worked, when you worked, and what you worked on—so you never have to guess or defend your billable hours again.
+                  </p>
                 </div>
-                <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                <div className="flex flex-col gap-3 min-[400px]:flex-row">
                   <Link href="/signup">
                     <Button size="lg" className="gap-1">
                       Begin Your Defense <ChevronRight className="h-4 w-4" />
@@ -88,12 +143,12 @@ export default function Home() {
                     </Button>
                   </Link>
                 </div>
-                <div className="text-xs text-muted-foreground italic border-l-2 border-muted pl-2 mt-4">
+                <div className="text-xs text-muted-foreground italic border-l-2 border-muted pl-2 mt-6">
                   * Your Honor, all tracking is local and designed for your eyes only. The prosecution has no access.
                 </div>
               </div>
-              <div className="flex items-center justify-center">
-                <div className="relative h-[400px] w-full max-w-[500px] rounded-lg bg-muted overflow-hidden shadow-xl">
+              <div className="flex items-center justify-center lg:justify-end">
+                <div className="relative h-[350px] sm:h-[400px] w-full max-w-[500px] rounded-lg bg-muted overflow-hidden shadow-xl">
                   <div className="absolute top-0 left-0 right-0 h-12 bg-background/90 flex items-center px-4 border-b">
                     <div className="flex gap-2">
                       <div className="h-3 w-3 rounded-full bg-red-500"></div>
@@ -205,15 +260,19 @@ export default function Home() {
               </div>
             </div>
             <div className="mx-auto max-w-4xl pt-12">
-              <div className="relative aspect-video overflow-hidden rounded-xl border bg-muted shadow-xl">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="rounded-full bg-background/90 p-4 inline-block shadow-lg">
-                      <Button size="icon" variant="ghost" className="h-16 w-16 rounded-full">
-                        <div className="h-0 w-0 border-y-8 border-y-transparent border-l-16 border-l-amber-500 ml-1"></div>
-                      </Button>
+              <div className="relative aspect-video max-h-64 sm:max-h-none overflow-hidden rounded-xl border bg-muted shadow-xl">
+                <img 
+                  src="/demo-video.png" 
+                  alt="Alibi dashboard showing legal case tracking with data visualizations, gavel, and legal documents"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-colors">
+                  <div className="rounded-full bg-white p-4 inline-block shadow-2xl">
+                    <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center hover:bg-amber-600 transition-colors">
+                      <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
                     </div>
-                    <p className="mt-4 font-medium text-lg">View Evidence in Action</p>
                   </div>
                 </div>
               </div>
@@ -279,7 +338,7 @@ export default function Home() {
                 price="Free"
                 description="Basic time defense for individuals"
                 features={["Basic Timeline Tracking", "5 Task Categories", "1 Week History", "Basic Reports"]}
-                buttonText="File Pro Se"
+                buttonText="Start Your Defense"
                 popular={false}
               />
               <PricingCard
@@ -311,7 +370,7 @@ export default function Home() {
                   "Team Reports",
                   "API Access",
                 ]}
-                buttonText="Schedule Consultation"
+                buttonText="Request a Hearing"
                 popular={false}
               />
             </div>
@@ -379,7 +438,7 @@ export default function Home() {
               </div>
               <span className="font-serif text-xl font-bold">Alibi</span>
             </div>
-            <nav className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+            <nav className="grid grid-cols-2 gap-4 sm:gap-8 sm:grid-cols-4">
               <div className="space-y-3">
                 <h3 className="text-sm font-medium">Evidence</h3>
                 <ul className="space-y-1">
@@ -468,7 +527,7 @@ export default function Home() {
               </div>
             </nav>
           </div>
-          <div className="flex flex-col gap-6 md:flex-row md:justify-between md:gap-12">
+          <div className="flex flex-col gap-4 sm:gap-6 md:flex-row md:justify-between md:gap-12">
             <p className="text-sm text-muted-foreground">
               &copy; {new Date().getFullYear()} Alibi Time Defense Co. All rights reserved. Case closed.
             </p>
