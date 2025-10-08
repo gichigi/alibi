@@ -6,7 +6,7 @@
 
 A time tracking landing page that demonstrates the power of committed brand voice through a fully-realized legal/courtroom metaphor.
 
-[View Demo](#) · [Read Brand Voice Guide](./BRAND_VOICE.md)
+[View on GitHub](https://github.com/gichigi/alibi) · [Read Brand Voice Guide](./BRAND_VOICE.md)
 
 </div>
 
@@ -81,7 +81,7 @@ Read the complete analysis in [BRAND_VOICE.md](./BRAND_VOICE.md).
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/alibi.git
+git clone https://github.com/gichigi/alibi.git
 cd alibi
 
 # Install dependencies
