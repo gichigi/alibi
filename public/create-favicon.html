@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Favicon.ico - Alibi</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .favicon-container { margin: 20px 0; }
+        canvas { border: 1px solid #ddd; margin: 10px 0; }
+        .download-btn { 
+            background: #f59e0b; 
+            color: white; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create Favicon.ico for Alibi</h1>
+    
+    <div class="favicon-container">
+        <canvas id="favicon-canvas" width="32" height="32"></canvas>
+        <br>
+        <button class="download-btn" onclick="downloadFavicon()">Download favicon.ico</button>
+    </div>
+
+    <script>
+        function createFavicon() {
+            const canvas = document.getElementById('favicon-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, 32, 32);
+            
+            // Draw amber circle background
+            ctx.fillStyle = '#f59e0b';
+            ctx.beginPath();
+            ctx.arc(16, 16, 16, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Draw white "A"
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 20px serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('A', 16, 16);
+        }
+
+        function downloadFavicon() {
+            const canvas = document.getElementById('favicon-canvas');
+            const link = document.createElement('a');
+            link.download = 'favicon.ico';
+            link.href = canvas.toDataURL('image/x-icon');
+            link.click();
+        }
+
+        // Create the favicon when page loads
+        createFavicon();
+    </script>
+</body>
+</html>
