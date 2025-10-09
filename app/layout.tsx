@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     siteName: 'Alibi',
     images: [
       {
-        url: '/og-image.png',
+        url: '/og-image.svg',
         width: 1200,
         height: 630,
         alt: 'Alibi — Your Billable Hours, Defended',
@@ -59,8 +59,24 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Alibi — Your Billable Hours, Defended',
     description: 'Build an airtight case for every billable hour. Automatic time tracking that proves you worked, when you worked, and what you worked on—so you never have to guess or defend your billable hours again.',
-    images: ['/twitter-card.png'],
+    images: ['/twitter-image.svg'],
     creator: '@tahigichigi',
+  },
+  icons: {
+    icon: [
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      {
+        rel: 'mask-icon',
+        url: '/safari-pinned-tab.svg',
+        color: '#f59e0b',
+      },
+    ],
   },
   manifest: '/manifest.json',
   verification: {
@@ -93,11 +109,6 @@ html {
   --font-mono: ${GeistMono.variable};
 }
         `}</style>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#f59e0b" />
       </head>
       <body>
         {children}
@@ -124,7 +135,7 @@ html {
                 "name": "Alibi Time Defense Co."
               },
               "keywords": "time tracking, billable hours, productivity, freelance",
-              "screenshot": "https://alibi-demo.vercel.app/og-image.png"
+              "screenshot": "https://alibi-demo.vercel.app/og-image.svg"
             })
           }}
         />
